@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dljwhbkfab4a5"
+path="res://.godot/imported/399246_anthousai_plant-quince-tree-shaking-a-small-quince-tree-01 (1) (mp3cut.net).mp3-c5f68090e9d944acec1536cbc1d2d2e8.mp3str"
+
+[deps]
+
+source_file="res://sound/399246_anthousai_plant-quince-tree-shaking-a-small-quince-tree-01 (1) (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/399246_anthousai_plant-quince-tree-shaking-a-small-quince-tree-01 (1) (mp3cut.net).mp3-c5f68090e9d944acec1536cbc1d2d2e8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

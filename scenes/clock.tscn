@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://clxcp7r2i2qym"]
+
+[ext_resource type="Script" path="res://scripts/clock.gd" id="1_3kwld"]
+[ext_resource type="Texture2D" uid="uid://6sqhxcys1km6" path="res://assets/alarm_clock.png" id="1_i7dw3"]
+[ext_resource type="FontFile" uid="uid://ibia3ajal640" path="res://assets/EndlessBossBattleRegular-v7Ey.ttf" id="3_3mwnx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7umgm"]
+font = ExtResource("3_3mwnx")
+font_size = 30
+font_color = Color(1, 0.788235, 0.443137, 1)
+
+[node name="clock" type="Node2D"]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_3kwld")
+
+[node name="AlarmClock" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(16, 16)
+texture = ExtResource("1_i7dw3")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = -48.0
+offset_top = 5.0
+offset_right = 48.0
+offset_bottom = 32.0
+text = "21:30"
+label_settings = SubResource("LabelSettings_7umgm")
+horizontal_alignment = 1

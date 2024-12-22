@@ -1,0 +1,138 @@
+[gd_scene load_steps=14 format=3 uid="uid://cppgn6bipryey"]
+
+[ext_resource type="Script" path="res://scripts/stick.gd" id="1_rqqyp"]
+[ext_resource type="Texture2D" uid="uid://dekcbrsfke8fs" path="res://assets/stick.png" id="2_0i0e5"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_5nc4h"]
+[ext_resource type="Shader" path="res://shaders/burn.gdshader" id="2_kjfmt"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0wm1t"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8nund"]
+width = 1192
+height = 1132
+noise = SubResource("FastNoiseLite_0wm1t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ko2hf"]
+shader = ExtResource("2_kjfmt")
+shader_parameter/dissolve_value = 0.0
+shader_parameter/burn_size = 0.1
+shader_parameter/burn_color = Color(1, 0.290196, 0, 1)
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_8nund")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y2pl3"]
+shader = ExtResource("2_5nc4h")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ao1d"]
+radius = 48.1664
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0i7oh"]
+size = Vector2(32, 32)
+
+[sub_resource type="Animation" id="Animation_qsoeh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("burning_stick:material:shader_parameter/dissolve_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_etnkd"]
+resource_name = "burn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stick:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("burning_stick:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("burning_stick:material:shader_parameter/dissolve_value")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_co06j"]
+_data = {
+"RESET": SubResource("Animation_qsoeh"),
+"burn": SubResource("Animation_etnkd")
+}
+
+[node name="stick" type="Node2D"]
+script = ExtResource("1_rqqyp")
+
+[node name="burning_stick" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_ko2hf")
+scale = Vector2(4, 4)
+texture = ExtResource("2_0i0e5")
+hframes = 3
+
+[node name="Stick" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_y2pl3")
+scale = Vector2(4, 4)
+texture = ExtResource("2_0i0e5")
+hframes = 3
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("CircleShape2D_7ao1d")
+
+[node name="fireplace_detect" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fireplace_detect"]
+visible = false
+shape = SubResource("RectangleShape2D_0i7oh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_co06j")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="fireplace_detect" to="." method="_on_fireplace_detect_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

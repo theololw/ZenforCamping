@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b7psvb4jgucg1"
+path="res://.godot/imported/399246__anthousai__plant-quince-tree-shaking-a-small-quince-tree-01 (1).wav-b76537568b9c54e6879e44a193809be2.sample"
+
+[deps]
+
+source_file="res://sound/399246__anthousai__plant-quince-tree-shaking-a-small-quince-tree-01 (1).wav"
+dest_files=["res://.godot/imported/399246__anthousai__plant-quince-tree-shaking-a-small-quince-tree-01 (1).wav-b76537568b9c54e6879e44a193809be2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

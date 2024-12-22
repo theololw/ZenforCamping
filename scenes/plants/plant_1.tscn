@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://3rkiajebmgqx"]
+
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="1_3p6so"]
+[ext_resource type="Script" path="res://scenes/plants/plant_1.gd" id="2_bcnon"]
+[ext_resource type="Texture2D" uid="uid://iqnj0mv3qesr" path="res://assets/plants.png" id="4_mmonr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d3bmg"]
+shader = ExtResource("1_3p6so")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_warrk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e7cp"]
+size = Vector2(16, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_062q1"]
+size = Vector2(16, 12)
+
+[node name="Plant1" type="Node2D"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_d3bmg")
+scale = Vector2(4, 4)
+script = ExtResource("2_bcnon")
+
+[node name="plant1" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_warrk")
+texture = ExtResource("4_mmonr")
+hframes = 4
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_0e7cp")
+
+[node name="fireplace_detect" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fireplace_detect"]
+visible = false
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_062q1")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="fireplace_detect" to="." method="_on_fireplace_detect_area_entered"]

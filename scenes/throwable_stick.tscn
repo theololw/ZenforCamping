@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk478uve4hrcj"]
+
+[ext_resource type="Texture2D" uid="uid://dekcbrsfke8fs" path="res://assets/stick.png" id="1_t2mkq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mf8m"]
+size = Vector2(16, 32)
+
+[node name="throwable_stick" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="Stick" type="Sprite2D" parent="RigidBody2D"]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("1_t2mkq")
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_7mf8m")

@@ -1,0 +1,247 @@
+[gd_scene load_steps=17 format=3 uid="uid://bsd325bxocsol"]
+
+[ext_resource type="Texture2D" uid="uid://d38l5vr0scf76" path="res://assets/fireplace.png" id="1_qmt0n"]
+[ext_resource type="Script" path="res://scripts/fireplace.gd" id="1_rl4py"]
+[ext_resource type="Texture2D" uid="uid://cjhau3qgw3o3a" path="res://assets/circle_05.png" id="2_gtu0v"]
+[ext_resource type="AudioStream" uid="uid://dyx2xhosjgxyg" path="res://sound/fireplace.wav" id="4_jim2c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_adpts"]
+radius = 192.167
+
+[sub_resource type="Animation" id="Animation_lvhgx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fireplace:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("embers:amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [25]
+}
+
+[sub_resource type="Animation" id="Animation_krn7w"]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fireplace:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("embers:amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("warmth/CollisionShape2D:shape:radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [8.0]
+}
+
+[sub_resource type="Animation" id="Animation_wtpxa"]
+resource_name = "idle_1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fireplace:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_e1ecx"]
+resource_name = "idle_2"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fireplace:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_quflb"]
+resource_name = "idle_3"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fireplace:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_5r7t6"]
+resource_name = "idle_full"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fireplace:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b1f1p"]
+_data = {
+"RESET": SubResource("Animation_lvhgx"),
+"dead": SubResource("Animation_krn7w"),
+"idle_1": SubResource("Animation_wtpxa"),
+"idle_2": SubResource("Animation_e1ecx"),
+"idle_3": SubResource("Animation_quflb"),
+"idle_full": SubResource("Animation_5r7t6")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ai2ew"]
+radius = 40.0
+
+[sub_resource type="Curve" id="Curve_j5co2"]
+max_value = 3.0
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(0.605042, 2.30769), 0.0, 0.0, 0, 0, Vector2(0.810924, 1.97802), 0.0, 0.0, 0, 0, Vector2(0.995798, 1.91209), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_xq1io"]
+offsets = PackedFloat32Array(0, 0.384615, 0.833333, 1)
+colors = PackedColorArray(1, 0.647059, 0, 0.301961, 1, 0.286275, 0, 0.431373, 0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a0q5n"]
+radius = 321.596
+
+[node name="fireplace" type="Node2D"]
+script = ExtResource("1_rl4py")
+
+[node name="Fireplace" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("1_qmt0n")
+hframes = 2
+vframes = 4
+
+[node name="grass_remover" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="grass_remover"]
+visible = false
+shape = SubResource("CircleShape2D_adpts")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b1f1p")
+}
+autoplay = "idle_full"
+
+[node name="lights" type="Node2D" parent="."]
+
+[node name="PointLight2D2" type="PointLight2D" parent="lights"]
+scale = Vector2(1.29, 1.29)
+color = Color(1, 0, 0, 0.843137)
+energy = 0.8
+texture = ExtResource("2_gtu0v")
+texture_scale = 1.2
+
+[node name="PointLight2D" type="PointLight2D" parent="lights"]
+scale = Vector2(4.87, 4.87)
+color = Color(1, 0.690196, 0.0392157, 1)
+texture = ExtResource("2_gtu0v")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 18
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
+shape = SubResource("CircleShape2D_ai2ew")
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="embers" type="CPUParticles2D" parent="."]
+position = Vector2(0, -8)
+amount = 25
+lifetime = 0.7
+randomness = 1.0
+fixed_fps = 30
+emission_shape = 1
+emission_sphere_radius = 21.15
+gravity = Vector2(0, -200)
+angular_velocity_min = 22.1
+angular_velocity_max = 136.6
+radial_accel_min = 13.8
+radial_accel_max = 13.8
+angle_max = 1411.0
+scale_amount_min = 1.5
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_j5co2")
+color_ramp = SubResource("Gradient_xq1io")
+
+[node name="warmth" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="warmth"]
+shape = SubResource("CircleShape2D_a0q5n")
+debug_color = Color(0.704971, 0.489218, 0, 0.42)
+
+[node name="crackling" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_jim2c")
+volume_db = 20.0
+autoplay = true
+attenuation = 4.28709
+
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
